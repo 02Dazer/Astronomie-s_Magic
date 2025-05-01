@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Supernova Explosion</title>
+    <style>
+        body,
+        html {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-image: url('WhatsApp Image 2025-04-28 at 11.11.46.jpeg');
+            color: white;
+            min-height: 100vh;
+            position: relative;
+        }
+        
+        body::before {
+            content: "";
+            background-image: url('WhatsApp Image 2025-04-27 at 20.19.37 (1).jpeg');
+            background-size: cover;
+            background-attachment: fixed;
+            background-position: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.7;
+            z-index: -1;
+        }
+        
+        canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+        }
+        
+        .content-container {
+            position: relative;
+            z-index: 2;
+            padding: 20px 0;
+        }
+        
+        h1 {
+            text-align: center;
+            color: rgba(223, 153, 25, 0.95);
+            margin-top: 20px;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+            text-shadow: 0 0 10px rgba(255, 165, 0, 0.5);
+        }
+        
+        .text-overlay {
+            background-color: rgba(0, 0, 0, 0.6);
+            border-radius: 15px;
+            padding: 25px;
+            width: 80%;
+            max-width: 1000px;
+            margin: 0 auto 40px auto;
+            box-shadow: 0 0 20px rgba(255, 165, 0, 0.3);
+        }
+        
+        ol,
+        ul {
+            padding-right: 20px;
+            margin-bottom: 15px;
+        }
+        
+        li {
+            margin-bottom: 8px;
+        }
+        
+        ul ul,
+        ol ul {
+            margin-top: 5px;
+        }
+        
+        p {
+            line-height: 1.6;
+        }
+        
+        @media (max-width: 768px) {
+            .text-overlay {
+                width: 90%;
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="supernova"></canvas>
+
+    <div class="content-container">
+        <h1>Supernova Explosion</h1>
+
+        <div class="text-overlay">
+            <p>Supernova Explosion* is one of the greatest cosmic phenomena and one of the most powerful and brilliant. It occurs when a star reaches the end of its life, resulting in a massive explosion that releases immense energy and materials into space.
+                Here are the key details:</p>
+            <p>Types of Supernova:</p>
+            <ol>
+                <li>Type I Supernova:</li>
+                <ul>
+                    <li>Occurs when a white dwarf in a binary star system explodes due to the accumulation of matter from the companion star.</li>
+                    <li>Leads to a thermonuclear explosion that completely destroys the star.</li>
+                </ul>
+                <li>Type II Supernova:</li>
+                <ul>
+                    <li>Happens when a massive star runs out of nuclear fuel, causing its core to collapse under gravity.</li>
+                    <li>Results in a massive explosion leaving behind a neutron star or black hole.</li>
+                </ul>
+            </ol>
+            <p>Importance of Supernova:</p>
+            <ul>
+                <li>Formation of Heavy Elements:</li>
+                <ul>
+                    <li>During the explosion, elements like iron and gold are produced, spreading through space and contributing to the formation of planets and new stars.</li>
+                </ul>
+                <li>Release of Shockwaves:</li>
+                <ul>
+                    <li>Compresses surrounding gas clouds, stimulating the formation of new stars.</li>
+                </ul>
+                <li>Source of Cosmic Rays:</li>
+                <ul>
+                    <li>Supernovae emit cosmic rays that influence the outer space environment.</li>
+                </ul>
+            </ul>
+            <p>Historical Examples:</p>
+            <ul>
+                <li>Supernova SN 1987A:</li>
+                <ul>
+                    <li>The explosion of a blue giant star in the Large Magellanic Cloud, visible to the naked eye.</li>
+                </ul>
+                <li>Supernova SN 1006:</li>
+                <ul>
+                    <li>Recorded by astronomers in 1006 and was one of the brightest supernovae in history.</li>
+                </ul>
+            </ul>
+            <p>Fascinating Facts:</p>
+            <ul>
+                <li>A supernova can be brighter than an entire galaxy for a short period.</li>
+                <li>Occurs in our galaxy approximately 3 times per century.</li>
+                <li>Nearby supernova explosions can affect Earth, such as by destroying the ozone layer.</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('supernova');
+        const ctx = canvas.getContext('2d');
+        let width = window.innerWidth;
+        let height = window.innerHeight;
+        canvas.width = width;
+        canvas.height = height;
+
+        const particles = [];
+
+        function randomColor() {
+            const colors = ['red', 'purple', 'steelblue', 'black'];
+            return colors[Math.floor(Math.random() * colors.length)];
+        }
+
+        class Particle {
+            constructor(x, y) {
+                this.x = x;
+                this.y = y;
+                this.size = Math.random() * 3 + 2;
+                this.speedX = (Math.random() - 0.5) * 10;
+                this.speedY = (Math.random() - 0.5) * 10;
+                this.color = randomColor();
+                this.life = 100;
+            }
+
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+                this.size *= 0.96;
+                this.life--;
+            }
+
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fillStyle = this.color;
+                ctx.fill();
+            }
+        }
+
+        function explode(x, y) {
+            for (let i = 0; i < 100; i++) {
+                particles.push(new Particle(x, y));
+            }
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, width, height);
+            ctx.fillStyle = "rgba(0, 0, 0, 0.1)";
+            ctx.fillRect(0, 0, width, height);
+
+            for (let i = 0; i < particles.length; i++) {
+                particles[i].update();
+                particles[i].draw();
+                if (particles[i].life <= 0) {
+                    particles.splice(i, 1);
+                    i--;
+                }
+            }
+            requestAnimationFrame(animate);
+        }
+
+        animate();
+        setInterval(() => {
+            explode(Math.random() * width, Math.random() * height);
+        }, 3000);
+
+        document.addEventListener('click', function(e) {
+            explode(e.clientX, e.clientY);
+        });
+
+        window.addEventListener('resize', () => {
+            width = window.innerWidth;
+            height = window.innerHeight;
+            canvas.width = width;
+            canvas.height = height;
+        });
+    </script>
+
+</body>
+
+</html>

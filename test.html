@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="Logo.gif">
+  <link rel="stylesheet" href="Acceuil.css">
+  <title>Astronomie's Magic</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&family=Poppins:wght@300&display=swap" rel="stylesheet">
+  <style>
+    /* General styles */
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      color: white;
+      overflow-x: hidden;
+    }
+
+    header {
+      text-align: center;
+      padding: 50px 20px 20px;
+      background: transparent;
+    }
+
+    header h1 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 2.5em;
+      margin-bottom: 10px;
+    }
+
+    header p {
+      font-size: 1.2em;
+      color: #ccc;
+    }
+
+    .categories {
+      text-align: center;
+      margin: 30px 0;
+    }
+
+    .categories button {
+      background: transparent;
+      border: 2px solid #6c63ff;
+      color: #6c63ff;
+      padding: 10px 20px;
+      margin: 5px;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: 0.3s;
+      font-size: 1em;
+    }
+
+    .categories button:hover {
+      background: #6c63ff;
+      color: white;
+    }
+
+    /* Gallery */
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 15px;
+      padding: 20px;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 1s ease-out, transform 1s ease-out;
+    }
+
+    .gallery.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .gallery .image-item {
+      position: relative;
+      cursor: pointer;
+    }
+
+    .gallery img {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+      border-radius: 15px;
+      transition: 0.3s ease;
+    }
+
+    .gallery img:hover {
+      transform: scale(1.05);
+      box-shadow: 0px 0px 15px 5px #6c63ff;
+    }
+
+    /* Lightbox */
+    .lightbox {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.9);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      z-index: 1000;
+      padding: 20px;
+    }
+
+    .lightbox-content {
+      position: relative;
+      max-width: 80%;
+      max-height: 80%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .lightbox img {
+      width: 100%;
+      height: auto;
+      border-radius: 10px;
+    }
+
+    .lightbox-description {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      background: rgba(0,0,0,0.6);
+      color: white;
+      text-align: center;
+      padding: 15px;
+      font-size: 1.1em;
+      border-bottom-left-radius: 10px;
+      border-bottom-right-radius: 10px;
+    }
+
+    .close-lightbox {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      font-size: 30px;
+      color: white;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+    }
+
+    footer {
+      text-align: center;
+      padding: 30px 20px;
+      font-style: italic;
+      color: #aaa;
+    }
+  </style>
+</head>
+
+<body style="background-color: #0b0c1e;">
+    
+    <nav>
+        <div class="logo"><img src="Logo.gif" alt="logo" style="width: 150px;height:150px;"></div>
+        <div class="title">Extraordinary phenomena of the cosmos</div>
+            <P class="contact"><strong>contact us in :</strong></P>
+            <a href="mailto:#" target="_blank">
+                <img src="gmail.png" style="width: 55px;height:55px; padding-top: 10px;margin-left: 20PX;margin-right: 50PX;">
+            </a>
+    </nav>
+
+<header style="padding-top: 200px;">
+  <h1>Explore the Mysteries of the Universe</h1>
+  <p>A visual journey through cosmic beauties, magical wonders, and fascinating phenomena.</p>
+</header>
+
+<div class="categories">
+  <button onclick="filterImages('all')">All</button>
+  <button onclick="filterImages('cosmos')">Cosmos</button>
+  <button onclick="filterImages('magie')">Magic</button>
+  <button onclick="filterImages('mystere')">Mysterious Phenomena</button>
+  <button onclick="filterImages('autres')">Other Wonders</button>
+</div>
+
+<section class="gallery" id="gallery">
+  <div class="image-item" data-category="cosmos" data-description="A spiral galaxy viewed from above, with luminous spiral arms made of stars, dust, and gas rotating around a massive black hole.">
+    <img src="galaxie-speral.jpg" alt="Spiral Galaxy">
+  </div>
+
+  <div class="image-item" data-category="magie" data-description="A shooting star is a small meteor burning brightly as it passes through Earth's atmosphere.">
+    <img src="etoilefilante.jpeg" alt="Shooting Star">
+  </div>
+
+  <div class="image-item" data-category="cosmos" data-description="A star cluster containing millions of tightly packed young stars born together.">
+    <img src="amas-etoile.jpg" alt="Star Cluster">
+  </div>
+
+  <div class="image-item" data-category="cosmos" data-description="The Orion Nebula: a colorful stellar nursery where new stars form in interstellar clouds.">
+    <img src="Orion_Nebula.jpg" alt="Orion Nebula">
+  </div>
+
+  <div class="image-item" data-category="magie" data-description="Meteor showers: multiple shooting stars streaking through the atmosphere in a single night.">
+    <img src="pluie-d-etoiles.jpg" alt="Meteor Shower">
+  </div>
+
+  <div class="image-item" data-category="cosmos" data-description="The Milky Way Galaxy: our home, appearing as a glowing band across the night sky.">
+    <img src="Milky_Way_over_The_Whistlers.jpg" alt="Milky Way">
+  </div>
+
+  <div class="image-item" data-category="autres" data-description="The red dusty surface of Mars, shaped by ancient winds and volcanic activity.">
+    <img src="surface-Mars.jpg" alt="Surface of Mars">
+  </div>
+
+  <div class="image-item" data-category="mystere" data-description="An artistic simulation of a black hole, bending and absorbing light.">
+    <img src="blackhole.jpeg" alt="Black Hole">
+  </div>
+
+  <div class="image-item" data-category="autres" data-description="The spectacular rings of Saturn, composed of countless small ice particles.">
+    <img src="Saturn.jpg" alt="Saturn's Rings">
+  </div>
+
+  <div class="image-item" data-category="mystere" data-description="Auroras are created when solar winds interact with Earth's magnetic field, lighting up the polar skies.">
+    <img src="aurorai.jpg" alt="Aurora Borealis">
+  </div>
+
+  <div class="image-item" data-category="autres" data-description="The icy surface of Europa, a moon of Jupiter, may hide a vast ocean beneath.">
+    <img src="Glace-Europe-(lune de Jupiter).jpg" alt="Europa's Ice">
+  </div>
+</section>
+
+<footer>
+  <p><strong>&ldquo;The most beautiful thing we can experience is the mysterious. It is the source of all true art and all science.&rdquo; ✨</strong></p>
+  <p>— Albert Einstein</p>
+</footer>
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox">
+  <div class="lightbox-content">
+    <button class="close-lightbox" onclick="closeLightbox()">✖</button>
+    <img src="" alt="">
+    <div class="lightbox-description" id="lightbox-description"></div>
+  </div>
+</div>
+
+<!-- Background Music -->
+<audio id="background-music" autoplay loop>
+  <source src="Calm Ambient.m4a" type="audio/mp3">
+</audio>
+
+<script>
+  // Scroll animation
+  window.addEventListener('scroll', () => {
+    const gallery = document.getElementById('gallery');
+    const galleryTop = gallery.getBoundingClientRect().top;
+    const windowHeight = window.innerHeight;
+    if (galleryTop < windowHeight - 100) {
+      gallery.classList.add('active');
+    }
+  });
+
+  // Filter images
+  function filterImages(category) {
+    const images = document.querySelectorAll('.image-item');
+    images.forEach(img => {
+      if (category === 'all' || img.dataset.category === category) {
+        img.style.display = 'block';
+      } else {
+        img.style.display = 'none';
+      }
+    });
+  }
+
+  // Lightbox functionality
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = lightbox.querySelector('img');
+  const lightboxDescription = document.getElementById('lightbox-description');
+
+  document.querySelectorAll('.image-item').forEach(item => {
+    item.addEventListener('click', () => {
+      lightbox.style.display = 'flex';
+      lightboxImg.src = item.querySelector('img').src;
+      lightboxDescription.textContent = item.dataset.description;
+    });
+  });
+
+  function closeLightbox() {
+    lightbox.style.display = 'none';
+  }
+
+  lightbox.addEventListener('click', (e) => {
+    if (e.target === lightbox) {
+      closeLightbox();
+    }
+  });
+
+  // Music autoplay
+  const audio = document.getElementById('background-music');
+  document.body.addEventListener('click', () => {
+    audio.play().catch(e => console.log('Auto-play blocked'));
+  }, { once: true });
+</script>
+
+</body>
+</html>

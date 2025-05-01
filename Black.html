@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="CONTENT-TYPE" content="text/html; charset=UTF-8">
+    <title>Black Holes</title>
+    <style>
+        body,
+        html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+            overflow-y: auto;
+            background: black;
+        }
+        
+        canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        
+        #prgph {
+            position: relative;
+            z-index: 2;
+            color: white;
+            text-align: justify;
+            padding: 20px;
+            width: 70%;
+            margin: 0 auto;
+            height: auto;
+            animation: pulse 1s infinite alternate;
+        }
+        h1{
+            color: fuchsia;
+        }
+
+        @keyframes pulse {
+            0% {
+                text-shadow: 0 0 15px black;
+            }
+            100% {
+                text-shadow: 0 0 20px rgb(238, 185, 185);
+            }
+        }
+        
+        h1 {
+            top: 0px;
+            position: relative;
+            z-index: 3;
+            text-align: center;
+            animation: suddenFade 7s infinite;
+            font-family: 'HorrorFont', Arial, sans-serif;
+            font-size: 5rem;
+            text-shadow: 4px 4px 10px purple, -4px -4px 10px rgba(0, 0, 0, 0.8);
+        }
+        
+        @keyframes suddenFade {
+            0%,
+            60% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0;
+            }
+            90% {
+                opacity: 1;
+            }
+        }
+    @media screen and (max-width: 768px) {
+    body,
+    html {
+        overflow-y: auto;
+    }
+
+    #prgph {
+        width: 90%;
+        font-size: 1rem;
+        padding: 15px;
+    }
+
+    h1 {
+        
+        font-size: 3rem;
+        text-shadow: 2px 2px 5px purple, -2px -2px 5px rgba(0, 0, 0, 0.8);
+    }
+
+    canvas {
+        width: 100%;
+        height: auto;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    #prgph {
+        font-size: 0.9rem;
+        padding: 10px;
+    }
+
+    h1 {
+        font-size: 2.5rem;
+        text-shadow: 1px 1px 3px purple, -1px -1px 3px rgba(0, 0, 0, 0.8);
+    }
+}
+    </style>
+</head>
+
+<body>
+    <h1>Black Holes</h1>
+    <div id="prgph">
+        <p>A black hole is a region in space characterized by immense gravity that makes it capable of pulling everything around it, including light, which makes it invisible. The boundary of a black hole is known as the "event horizon" , the point beyond
+            which nothing can escape.</p>
+        <h2 style="text-shadow: 4px 4px 10px purple"> How is a black hole formed? </h2>
+        <lu>
+            <li>A black hole forms when very massive stars collapse on themselves at the end of their life cycle, compressing their mass into a very small space.</li>
+            <li>There are also black holes believed to have formed since the Big Bang.</li>
+        </lu>
+        <h2 style="text-shadow: 4px 4px 10px purple"> Types of black holes:</h2>
+        <lo>
+            <li>Primordial black holes: Extremely small, thought to have formed in the early universe.</li>
+            <li>Stellar black holes: Formed from the collapse of massive stars.</li>
+            <li>Supermassive black holes: Found at the centers of galaxies, like the black hole at the center of the Milky Way.</li>
+        </lo>
+        <h2 style="text-shadow: 4px 4px 10px purple"> Interesting facts:</h2>
+        <lu>
+            <li>A black hole cannot be seen directly, but its effects on nearby stars and materials can be observed.</li>
+            <li>The first image of a black hole was captured in 2019, showing a bright ring around a dark area.</li>
+            <li>Black holes do not "suck" things as commonly believed; rather, objects fall into them due to gravity.</li>
+        </lu>
+    </div>
+    <canvas id="black"></canvas>
+    <script src="black.js"></script>
+</body>
+
+</html>

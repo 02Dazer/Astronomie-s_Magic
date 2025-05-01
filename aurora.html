@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="ar">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aurora Borealis</title>
+    <style>
+        body,
+        html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+            overflow-y: auto;
+            background: black;
+        }
+        
+        canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        
+        #content {
+            position: relative;
+            z-index: 2;
+            color: white;
+            text-align: justify;
+            padding: 20px;
+            width: 90%;
+            height: auto;
+            overflow-y: hidden;
+            margin: 0 auto;
+            box-sizing: border-box;
+            text-shadow: 0 0 5px #00ff00;
+            animation: pulse 1s infinite alternate;
+            background-color: rgba(0, 0, 0, 0.5);
+            ;
+        }
+        
+        @keyframes pulse {
+            0% {
+                text-shadow: 0 0 15px black;
+            }
+            100% {
+                text-shadow: 0 0 20px gray;
+            }
+        }
+        
+        @keyframes waveText {
+            0% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(10px);
+            }
+            100% {
+                transform: translateY(0px);
+            }
+        }
+        
+        h1 {
+            top: 0px;
+            font-size: 5rem;
+            z-index: 3;
+            color: white;
+            text-align: center;
+            font-family: "Lucida Handwriting", cursive;
+            text-shadow: 3px 3px 10px #8A2BE2;
+            animation: waveText 2s infinite ease-in-out;
+        }
+        
+        h2 {
+            font-size: 1.3rem;
+            color: rgb(192, 234, 241);
+        }
+        
+        p {
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+                text-shadow: 2px 2px 8px #8A2BE2;
+            }
+            #content {
+                padding: 10px;
+                font-size: 0.9rem;
+            }
+            h2 {
+                font-size: 1rem;
+            }
+        }
+        
+        @media (min-width: 769px) and (max-width: 1200px) {
+            h1 {
+                font-size: 3.5rem;
+            }
+            #content {
+                padding: 15px;
+                font-size: 1rem;
+            }
+            h2 {
+                font-size: 1.2rem;
+            }
+        }
+        
+        @media (min-width: 1201px) {
+            h1 {
+                font-size: 4.2rem;
+            }
+            #content {
+                padding: 20px;
+                font-size: 1.1rem;
+            }
+            h2 {
+                font-size: 1.3rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Aurora Borealis</h1>
+    <div id="content">
+
+        <h2>What Causes the Aurora Borealis?</h2>
+        <p>The Aurora Borealis occurs when charged particles from the solar wind interact with Earth's magnetic field and atmosphere...</p>
+        <h2>Where Can You See the Aurora Borealis?</h2>
+        <p>The Aurora Borealis is typically visible in high-latitude regions around the Arctic, including:</p>
+        <ul>
+            <li>Alaska</li>
+            <li>Canada</li>
+            <li>Iceland</li>
+            <li>Greenland</li>
+            <li>The Faroe Islands</li>
+            <li>Scandinavia</li>
+            <li>Finland</li>
+            <li>Scotland</li>
+            <li>Russia</li>
+        </ul>
+        <h2>When Is the Best Time to See the Aurora Borealis?</h2>
+        <p>Auroras are more frequent and intense during the peak of the 11-year sunspot cycle or during geomagnetic storms. The best viewing times are usually between September and April, when the nights are darker and the aurora is more active.</p>
+        <h2>Types of Aurora Borealis</h2>
+        <p>There are several types of auroras, including:</p>
+        <ul>
+            <li><strong>Discrete Aurora:</strong> Structured into distinct features with well-defined edges, such as arcs, rays, and coronas.</li>
+            <li><strong>Diffuse Aurora:</strong> Appears relatively structureless with indistinct edges and amorphous forms.</li>
+            <li><strong>Pulsating Aurora:</strong> Intensity variations over short timescales, typically with periods of 2-20 seconds.</li>
+            <li><strong>STEVE (Strong Thermal Emission Velocity Enhancement):</strong> A rare type of aurora caused by a ribbon of hot plasma in the upper atmosphere.</li>
+        </ul>
+        <h2>Colors of the Aurora Borealis</h2>
+        <p>The colors of the aurora depend on the altitude and energy of the particles:</p>
+        <ul>
+            <li><strong>Green:</strong> Oxygen emissions at altitudes of around 100-200 km.</li>
+            <li><strong>Red:</strong> Oxygen emissions at higher altitudes.</li>
+            <li><strong>Blue/Purple:</strong> Nitrogen emissions at lower altitudes.</li>
+        </ul>
+        <p>The Aurora Borealis is a complex and fascinating phenomenon, and scientists continue to study it to better understand the underlying physical processes.</p>
+    </div>
+    <canvas id="auroraCanvas"></canvas>
+    <script>
+        const canvas = document.getElementById("auroraCanvas");
+        const ctx = canvas.getContext("2d");
+
+        let width, height;
+
+        function resizeCanvas() {
+            width = window.innerWidth;
+            height = window.innerHeight;
+            canvas.width = width;
+            canvas.height = height;
+        }
+
+        resizeCanvas();
+        window.addEventListener("resize", resizeCanvas);
+
+        let time = 0;
+
+        function drawAurora() {
+            ctx.clearRect(0, 0, width, height);
+            const gradient = ctx.createLinearGradient(0, 0, width, height);
+            gradient.addColorStop(0, `rgba(${Math.floor(Math.sin(Date.now() * 0.005) * 127 + 128)}, 255, 150, 0.6)`);
+            gradient.addColorStop(0.5, `rgba(150, ${Math.floor(Math.sin(Date.now() * 0.00099) * 127 + 128)}, 255, 0.3)`);
+            gradient.addColorStop(1, `rgba(255, 100, ${Math.floor(Math.sin(Date.now() * 0.004) * 127 + 128)}, 0.3)`);
+
+            ctx.fillStyle = gradient;
+            ctx.fillRect(0, 0, width, height);
+
+            time += 1;
+
+            requestAnimationFrame(drawAurora);
+        }
+
+        drawAurora();
+    </script>
+</body>
+
+</html>
